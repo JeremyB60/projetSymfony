@@ -19,8 +19,8 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $prix = null;
+    #[ORM\Column]
+    private ?int $prix = null;
 
     #[ORM\Column(length: 255)]
     private ?string $imageUrl = null;
@@ -57,12 +57,12 @@ class Product
         return $this;
     }
 
-    public function getPrix(): ?string
+    public function getPrix(): ?int
     {
         return $this->prix;
     }
 
-    public function setPrix(string $prix): static
+    public function setPrix(int $prix): static
     {
         $this->prix = $prix;
 
