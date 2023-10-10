@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Accueil
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center">Liste des Produits</h1>
+    <div class="container">
+        <div class="row text-center mt-5">
+        {# Récupère les produits dans la bdd et les affiche sous forme de card #}
+            {% for product in products %}
+                <div class="col-md-6 col-lg-3">
+                    <div class="card">
+                        <img src="{{ product.imageUrl }}" class="card-img-top" alt="{{ product.nom }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.nom | capitalize }}</h5>
+                            <p class="card-text">{{ product.type | capitalize }}</p>
+                            <p class="card-text">{{ product.prix | number_format(2) }} €</p>
+                            <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-warning">Détail</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

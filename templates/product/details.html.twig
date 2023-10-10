@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ product.nom | capitalize }}
+{% endblock %}
+
+{% block body %}
+
+    {# Affiche le détail du produit #}
+    <div class="container">
+        <div class="row text-center mt-5">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <img src="{{ product.imageUrl }}" class="card-img-top" alt="{{ product.nom }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.nom | capitalize }}</h5>
+                        <p class="card-text">{{ product.type | capitalize }}</p>
+                        <p class="card-text">{{ product.prix | number_format(2) }} €</p>
+                        <p class="card-text">{{ product.description }}</p>
+                        <a href="{{ path('app_home') }}" class="btn btn-danger">Retour Accueil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
