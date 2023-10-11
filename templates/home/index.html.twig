@@ -18,6 +18,7 @@
                             <h5 class="card-title">{{ product.nom | capitalize }}</h5>
                             <p class="card-text">{{ product.type | capitalize }}</p>
                             <p class="card-text">{{ product.prix | number_format(2) }} €</p>
+                            <a href="{{ path("add_cart", {id: product.id}) }}" class="btn btn-success">Ajouter</a>
                             <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-warning">Détail</a>
                         </div>
                     </div>
