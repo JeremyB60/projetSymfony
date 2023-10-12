@@ -5,9 +5,8 @@
 {% endblock %}
 
 {% block body %}
-
-    <h1 class="text-center">Liste des Produits</h1>
     <div class="container">
+        <h1 class="text-center">Liste des Produits</h1>
         <div class="row text-center mt-5">
         {# Récupère les produits dans la bdd et les affiche sous forme de card #}
             {% for product in products %}
@@ -26,5 +25,4 @@
             {% endfor %}
         </div>
     </div>
-
 {% endblock %}

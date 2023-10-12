@@ -1,10 +1,9 @@
-/* .card {
-    height: 250px;
-    overflow: hidden;
-}
-*/
 .card img {
     height: 120px;
     width: fit-content;
     margin: auto;
 } 
+
+table {
+    line-height: 50px;
+}

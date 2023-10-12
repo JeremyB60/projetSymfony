@@ -13,25 +13,18 @@
             <script src="{{asset('assets/js/bootstrap.js')}}"></script>
         {% endblock %}
     </head>
-    
-    <body>         
-        <div class="container">
-            {# Affiche la navbar #}
-            <header>
-                {% block navbar %}
-                    {{ include('navbar.html.twig') }}
-                {% endblock %}
-            </header>
 
-            {% block body %}
-            {% endblock %}
-
-            {# Affichage du message d'erreur Flash #}
-            {% for message in app.flashes('error') %}
-            <div class="alert alert-danger">
-                {{ message }}
-            </div>
-            {% endfor %}
+        {# Affiche la navbar #}
+        {% block navbar %}
+            {{ include('navbar.html.twig') }}
+        {% endblock %}
+        {% block body %}
+        {% endblock %}
+        {# Affichage du message d'erreur Flash #}
+        {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
         </div>
-    </body>
+        {% endfor %}
+
 </html>
