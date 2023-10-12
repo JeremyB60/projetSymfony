@@ -6,6 +6,7 @@ use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 
 class CartController extends AbstractController
@@ -31,6 +32,32 @@ class CartController extends AbstractController
         return $this->render('cart/index.html.twig', compact('dataPanier', 'total'));
     }
     
+    #[Route('/add-quantity', name: 'add_quantity_cart')]
+    public function addQuantity(Request $request, SessionInterface $session)
+    {
+        $id = $request->request->get('id');
+        $quantity = $request->request->get('quantity');
+
+        // Vérifie que la quantité est un nombre entier positif
+        if (!ctype_digit($quantity) || $quantity <= 0) {
+            // Gérer ici le cas où la quantité est invalide, par exemple rediriger vers une page d'erreur
+        }
+
+        // Récupère le panier actuel
+        $panier = $session->get("panier", []);
+
+        if (!empty($panier[$id])) {
+            $panier[$id] += (int)$quantity;
+        } else {
+            $panier[$id] = (int)$quantity;
+        }
+
+        // Sauvegarde dans la session
+        $session->set("panier", $panier);
+
+        return $this->redirectToRoute("app_cart");
+    }
+
     #[Route('/add/{id}', name: 'add_cart')]
     public function add($id, SessionInterface $session)
     {

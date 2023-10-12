@@ -6,7 +6,7 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="text-center">Liste des Produits</h1>
+        <h1 class="h3 mt-2 mb-3 font-weight-normal text-center">Liste des Produits</h1>
         {# Filtres #}
         <div>
             <span>Filtre : </span>
@@ -14,7 +14,7 @@
                 <a href="{{ path('app_home', {'type': type}) }}" class="btn btn-secondary">{{ type | capitalize }}s</a>
             {% endfor %}
             {% if app.request.query.has('type') %}
-                <a href="{{ path('app_home') }}" class="btn btn-danger">Supprimer le filtre</a>
+                <a href="{{ path('app_home') }}" class="link-dark link-offset-2 link-underline link-underline-opacity-0">&#10060 Effacer le filtre</a>
             {% endif %}
         </div>
         <div class="row text-center mt-5">
@@ -27,7 +27,15 @@
                             <h5 class="card-title">{{ product.nom | capitalize }}</h5>
                             <p class="card-text">{{ product.type | capitalize }}</p>
                             <p class="card-text">{{ product.prix | number_format(2) }} €</p>
-                            <a href="{{ path("add_cart", {'id': product.id}) }}" class="btn btn-success">Ajouter</a>
+                            {# <a href="{{ path("add_cart", {'id': product.id}) }}" class="btn btn-success">Ajouter 1 fois au panier</a> #}
+                            <form method="POST" action="{{ path('add_quantity_cart') }}">
+                                <input type="hidden" name="id" value="{{ product.id }}">
+                                <div class="form-group">
+                                    <label for="quantity">Quantité :</label>
+                                    <input type="number" name="quantity" id="quantity" style="width: 60px" min="1">
+                                </div>
+                                <button type="submit" class="btn btn-success m-2">Ajouter au panier</button>
+                            </form>
                             <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-warning">Détail</a>
                         </div>
                     </div>
