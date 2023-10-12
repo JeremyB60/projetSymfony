@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function index(ProductRepository $productRepository, Request $request)
     {
         $type = $request->query->get('type'); // Récupère le paramètre 'type' de la requête
