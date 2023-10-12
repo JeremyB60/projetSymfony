@@ -21,10 +21,10 @@
                     <td><img src="{{ element.produit.imageUrl }}" alt="{{ element.produit.nom }}" style='width: 50px'>
                     {{ element.produit.nom | capitalize }}</td>
                     <td class="text-center">{{ element.produit.prix | number_format(2) }} €</td>
-                    <td>
-                        <a href="{{ path("add_cart", {id: element.produit.id}) }}" class="btn btn-success" style="width: 40px">+</a>
-                        <span class="p-2">{{ element.quantite }}</span>
+                    <td class="align">
                         <a href="{{ path("remove_cart", {id: element.produit.id}) }}" class="btn btn-success" style="width: 40px">-</a>
+                        <span class="px-3">{{ element.quantite }}</span>
+                        <a href="{{ path("add_cart", {id: element.produit.id}) }}" class="btn btn-success" style="width: 40px">+</a>
                     </td>
                     <td>{{ (element.quantite * element.produit.prix) | number_format(2) }} €</td>
                     <td>

@@ -7,6 +7,16 @@
 {% block body %}
     <div class="container">
         <h1 class="text-center">Liste des Produits</h1>
+        {# Filtres #}
+        <div>
+            <span>Filtre : </span>
+            {% for type in types %}
+                <a href="{{ path('app_home', {'type': type}) }}" class="btn btn-secondary">{{ type | capitalize }}s</a>
+            {% endfor %}
+            {% if app.request.query.has('type') %}
+                <a href="{{ path('app_home') }}" class="btn btn-danger">Supprimer le filtre</a>
+            {% endif %}
+        </div>
         <div class="row text-center mt-5">
         {# Récupère les produits dans la bdd et les affiche sous forme de card #}
             {% for product in products %}
@@ -17,7 +27,7 @@
                             <h5 class="card-title">{{ product.nom | capitalize }}</h5>
                             <p class="card-text">{{ product.type | capitalize }}</p>
                             <p class="card-text">{{ product.prix | number_format(2) }} €</p>
-                            <a href="{{ path("add_cart", {id: product.id}) }}" class="btn btn-success">Ajouter</a>
+                            <a href="{{ path("add_cart", {'id': product.id}) }}" class="btn btn-success">Ajouter</a>
                             <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-warning">Détail</a>
                         </div>
                     </div>
