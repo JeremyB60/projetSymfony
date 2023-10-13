@@ -8,8 +8,10 @@ table {
     line-height: 50px;
 }
 
-.align {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+table thead tr {
+    border-bottom: 1px solid grey;
+}
+
+table tbody tr:last-child {
+    border-bottom: 1px solid grey;
 }

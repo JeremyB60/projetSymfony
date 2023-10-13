@@ -18,7 +18,10 @@
             <div>
                 <span>Filtre : </span>
                 {% for type in types %}
-                    <a href="{{ path('app_home', {'type': type}) }}" class="btn btn-secondary">{{ type | capitalize }}s</a>
+                        {% set borderColors = ["primary", "success", "danger", "warning", "info", "dark"] %}
+                        {% set randomColor = borderColors[random(0, borderColors | length - 1)] %}
+
+                    <a href="{{ path('app_home', {'type': type}) }}" class="btn btn-{{ randomColor }}">{{ type | capitalize }}s</a>
                 {% endfor %}
                 {% if app.request.query.has('type') %}
                     <a href="{{ path('app_home') }}" class="link-dark link-offset-2 link-underline link-underline-opacity-0">&#10060 Effacer le filtre</a>
@@ -28,13 +31,15 @@
             {# Récupère les produits dans la bdd et les affiche sous forme de card #}
                 {% for product in products %}
                     <div class="col-md-6 col-lg-3">
-                        <div class="card">
+                        {% set borderColors = ["primary", "success", "danger", "warning", "info", "dark"] %}
+                        {% set randomColor = borderColors[random(0, borderColors | length - 1)] %}
+                        <div class="card border-{{ randomColor }} py-5">
                             <img src="{{ product.imageUrl }}" class="card-img-top" alt="{{ product.nom }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ product.nom | capitalize }}</h5>
                                 <p class="card-text">{{ product.type | capitalize }}</p>
                                 <p class="card-text">{{ product.prix | number_format(2) }} €</p>
-                                <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-warning">Détail</a>
+                                <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-{{ randomColor }}">Détail</a>
                                 {# <a href="{{ path("add_cart", {'id': product.id}) }}" class="btn btn-success">Ajouter 1 fois au panier</a> #}
                                 <form method="POST" action="{{ path('add_quantity_cart') }}">
                                     <input type="hidden" name="id" value="{{ product.id }}">
@@ -42,7 +47,7 @@
                                         <label for="quantity">Quantité :</label>
                                         <input type="number" name="quantity" id="quantity" class="text-center m-2" style="width: 60px" value="1" min="1">
                                     </div>
-                                    <button type="submit" class="btn btn-success">Ajouter au panier</button>
+                                    <button type="submit" class="btn btn-{{ randomColor }}">Ajouter au panier</button>
                                 </form>
                             </div>
                         </div>

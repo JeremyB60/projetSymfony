@@ -21,7 +21,7 @@
                         <td><img src="{{ element.produit.imageUrl }}" alt="{{ element.produit.nom }}" style='width: 50px'>
                         {{ element.produit.nom | capitalize }}</td>
                         <td class="text-center">{{ element.produit.prix | number_format(2) }} €</td>
-                        <td class="align">
+                        <td>
                             <a href="{{ path("remove_cart", {id: element.produit.id}) }}" class="btn btn-success" style="width: 40px">-</a>
                             <span class="px-3">{{ element.quantite }}</span>
                             <a href="{{ path("add_cart", {id: element.produit.id}) }}" class="btn btn-success" style="width: 40px">+</a>
@@ -45,12 +45,19 @@
                 <tr>
                     <td colspan="3" class="text-end">Total</td>
                     <td class="text-center">{{ total | number_format(2) }} €</td>
-                    <td><a href="{{ path("delete_all_cart") }}" class="btn btn-danger">Vider le panier</a>
-
+                    <td>
+                        {% if dataPanier is not empty %}
+                            <a href="{{ path("delete_all_cart") }}" class="btn btn-danger">Vider le panier</a>
+                        {% endif %}
+                    </td>
 
                 </tr>
             </tfoot>
         </table>
-        <a href="{{ path('app_orders_add') }}" class="btn btn-primary">Valider le panier</a>
+        {% if dataPanier is not empty %}
+            <a href="{{ path('app_orders_add') }}" class="btn btn-primary">Valider le panier</a>
+        {% else %}
+            <button type="button" class="btn btn-primary" disabled>Valider le panier</a>
+        {% endif %}
     </div>
 {% endblock %}
